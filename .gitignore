@@ -6,3 +6,5 @@ libraryREST.cabal
 libraryREST.iml
 config/client_session_key.aes
 out
+libraryREST.sqlite3-shm
+libraryREST.sqlite3-wal
