@@ -3,5 +3,29 @@
 
 /auth AuthR Auth getAuth
 
-/books BooksR GET
-/books/#BookEntityId BookR GET
+-- Books routes
+/books BooksR GET POST
+/books/#BookEntityId BookR GET DELETE PUT
+
+/books/#BookEntityId/authors BookAuthorsR GET POST
+/books/#BookEntityId/authors/#AuthorEntityId BookAuthorR DELETE
+
+-- /books/#BookEntityId/charters BookCharters GET POST
+-- /books/#BookEntityId/charters/#CharterEntityId DELETE
+
+-- /books/#BookEntityId/history BookHistory GET POST
+-- /books/#BookEntityId/history/#HistoryEntityId DELETE PUT
+
+-- Authors routes
+-- /authors AuthorsR GET POST
+-- /authors/#AuthorEntityId AuthorR GET DELETE PUT
+
+-- /authors/#AuthorEntityId/books AuthorBooksR GET POST
+-- /authors/#AuthorEntityId/books/#BookEntityId DELETE
+
+-- Reader routes
+-- /readers ReadersR GET POST
+-- /readers/#ReaderEntityId GET DELETE PUT
+
+-- /readers/#ReaderEntityId/books GET POST
+-- /readers/#ReaderEntityId/books/#BookEntityId DELETE

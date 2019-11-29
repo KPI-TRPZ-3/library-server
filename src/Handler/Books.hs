@@ -4,9 +4,15 @@
 
 module Handler.Books where
 
-import Import
+import           Import
 
 getBooksR :: Handler Value
 getBooksR = do
   books <- runDB $ selectList [] [] :: Handler [Entity BookEntity]
   returnJson books
+
+postBooksR :: Handler ()
+postBooksR = do
+  book <- requireCheckJsonBody :: Handler BookEntity
+  _ <- runDB $ insert book
+  sendResponseStatus status201 "CREATED"

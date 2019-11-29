@@ -1,25 +1,25 @@
-{-# LANGUAGE ExplicitForAll #-}
-{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE ExplicitForAll        #-}
+{-# LANGUAGE InstanceSigs          #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RankNTypes            #-}
+{-# LANGUAGE TemplateHaskell       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE ViewPatterns          #-}
 
 module Foundation where
 
-import Control.Monad.Logger (LogSource)
-import Database.Persist.Sql (ConnectionPool, runSqlPool)
-import Import.NoFoundation
+import           Control.Monad.Logger (LogSource)
+import           Database.Persist.Sql (ConnectionPool, runSqlPool)
+import           Import.NoFoundation
 
 -- Used only when in "auth-dummy-login" setting is enabled.
-import Yesod.Auth.Dummy
+import           Yesod.Auth.Dummy
 
-import Yesod.Auth.OpenId (IdentifierType(Claimed), authOpenId)
-import Yesod.Core.Types (Logger)
-import qualified Yesod.Core.Unsafe as Unsafe
+import           Yesod.Auth.OpenId    (IdentifierType (Claimed), authOpenId)
+import           Yesod.Core.Types     (Logger)
+import qualified Yesod.Core.Unsafe    as Unsafe
 
 -- | The foundation datatype for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -27,10 +27,10 @@ import qualified Yesod.Core.Unsafe as Unsafe
 -- access to the data present here.
 data App =
   App
-    { appSettings :: AppSettings
-    , appConnPool :: ConnectionPool -- ^ Database connection pool.
+    { appSettings    :: AppSettings
+    , appConnPool    :: ConnectionPool -- ^ Database connection pool.
     , appHttpManager :: Manager
-    , appLogger :: Logger
+    , appLogger      :: Logger
     }
 
 -- This is where we define all of the routes in our application. For a full
@@ -85,9 +85,11 @@ instance Yesod App
     -> Bool -- ^ Whether or not this is a "write" request.
     -> Handler AuthResult
   -- Routes not requiring authentication.
-  isAuthorized (AuthR _) _ = return Authorized
-  isAuthorized (BookR _) _ = return Authorized
-  isAuthorized BooksR _ = return Authorized
+  isAuthorized (AuthR _) _         = return Authorized
+  isAuthorized (BookR _) _         = return Authorized
+  isAuthorized BooksR _            = return Authorized
+  isAuthorized (BookAuthorsR _) _  = return Authorized
+  isAuthorized (BookAuthorR _ _) _ = return Authorized
   shouldLogIO :: App -> LogSource -> LogLevel -> IO Bool
   shouldLogIO app _source level =
     return $ appShouldLogAll (appSettings app) || level == LevelWarn || level == LevelError
@@ -126,7 +128,7 @@ isAuthenticated = do
   return $
     case muid of
       Nothing -> Unauthorized "You must login to access this"
-      Just _ -> Authorized
+      Just _  -> Authorized
 
 instance YesodAuthPersist App
 
