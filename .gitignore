@@ -1,0 +1,8 @@
+.stack-work/
+libraryREST.cabal
+*~
+.idea
+*.sqlite3
+libraryREST.iml
+config/client_session_key.aes
+out
