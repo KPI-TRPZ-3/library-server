@@ -18,22 +18,269 @@ It is a API allowing to manage a virtual library.
                 "releaseDate": "2019-09-22",
                 "title": "The title",
                 "description": "The description"
-            },
+            }
         ]
 
 ### Create a New Book [POST]
 
-You may create your own question using this action. It takes a JSON
+You may create the book. It takes a JSON
 object containing a book.
 
 + Request (application/json)
 
         {
             "readerId": null,
-            "id": 1,
             "releaseDate": "2019-09-22",
             "title": "The title",
             "description": "The description"
-        },
+        }
 
-+ Response 201 (application/json)
++ Response 201
+
+## Books Instance [/books/{bookId}]
+
+### Get the Book [GET]
+
+Finds the book by id
+
++ Response 200 (application/json)
+
+        {
+            "readerId": null,
+            "id": 1,
+            "releaseDate": "2019-09-22",
+            "title": "Test",
+            "description": "Example"
+        }
+
+### Delete the Book [DELETE]
+
+Deletes the book
+
++ Response 200
+
+### Modify the Book [PUT]
+
+You may update the book. It takes a JSON 
+object containing a book.
+
++ Request (application/json)
+
+        {
+            "readerId": null,
+            "releaseDate": "2019-09-22",
+            "title": "Modified title",
+            "description": "Modified description"
+        }
+
++ Response 200
+
+## Authors of Book Instance [/books/{bookId}/authors]
+
+### List Authors of the Book [GET]
+
+Finds all authors of the book
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Name",
+            "surname": "Surname"
+        }
+
+### Add Authors to the Book [POST]
+
+You may bind the Book and Authors. It takes JSON Array with ids of authors
+
++ Request (application/json)
+
+        [ 
+            1,
+            2,
+            3
+        ]
+
++ Response 201
+
+## Author Instance of the Book Instance [/books{bookId}/authors/{authorId}]
+
+### Unbind Author from the Book [DELETE]
+
++ Response 200
+
+## Charters of Book Instance [/books/{bookId}/charters]
+
+### List Charters of the Book [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "bookId": 1,
+            "id": 1,
+            "title": "The Charter"
+          }
+        ]
+
+### Creates Charter of the Book [POST]
+
++ Request (application/json)
+
+        {
+            "title": "The title of Charter"
+        }
+        
++ Response 201
+
+## Charter Instance of the Book [/books/{bookId}/charters/{charterId}]
+
+### Delete the Charter [DELETE]
+
++ Response 200
+
+### Modify the Charter [PUT]
+
++ Request (application/json)
+
+        {
+            "title": "The modified title of Charter"
+        }
+        
++ Response 200
+        
+## History of the Book [/books/{bookId}/history]
+
+### List History of the Book [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "status": "not returned",
+            "returnedDate": "2019-11-16",
+            "readerId": 1,
+            "takenDate": "2019-03-19",
+            "bookId": 1,
+            "realReturnedDate": null,
+            "id": 1
+          }
+        ]
+
+### Create the history record of the Book [POST]
+
++ Request (application/json)
+
+          {
+            "status": "not returned",
+            "returnedDate": "2019-11-16",
+            "readerId": 1,
+            "takenDate": "2019-03-19",
+            "bookId": 1,
+            "realReturnedDate": null
+          }
+
++ Response 201
+
+## The History Record of the Book [/books/{bookId}/history/{historyId}]
+
+### Modify History record [PUT]
+
++ Request (application/json)
+
+        {
+            "status": "not returned",
+            "returnedDate": "2019-11-16",
+            "readerId": 1,
+            "takenDate": "2019-03-19",
+            "bookId": 1,
+            "realReturnedDate": "2019-04-19"
+          }
+
++ Response 200
+
+## Authors Collection [/authors]
+
+### List All Authors [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "name": "Name",
+            "id": 1,
+            "surname": "Surname"
+          }
+        ]
+
+### Create new Author [POST]
+
++ Request (application/json)
+
+        {
+            "name": "Name"
+            "surname": "Surname"
+        }
+        
++ Response 201
+
+## Author instance [/authors/{authorId}]
+
+### Get the Author [GET]
+
+Finds the Author by ID
+
++ Response 200 (application/json)
+
+        {
+            "name": "Name",
+            "id": 1,
+            "surname": "Surname"
+        }
+        
+### Delete the Author [DELETE]
+
++ Response 200
+
+### Modify the Author [PUT]
+
++ Request (application/json)
+
+        {
+            "name": "Name",
+            "surname": "Surname"
+        }
+        
++ Response 200
+
+## Books Collection of the Author [/authors/{authorId}/books]
+
+### List all books of author [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "readerId": null,
+            "id": 1,
+            "releaseDate": "2019-09-22",
+            "title": "Test",
+            "description": "Example"
+          }
+        ]
+
+### Bind Book and Author [POST]
+
++ Request (application/json)
+
+        [
+            1
+        ]
+        
++ Response 201
+
+## The Book Instance of the Author [/authors/{authorId}/books/{bookId}]
+
+### Unbind author and the book [DELETE]
+
++ Response 200
