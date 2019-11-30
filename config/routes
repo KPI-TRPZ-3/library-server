@@ -10,22 +10,22 @@
 /books/#BookEntityId/authors BookAuthorsR GET POST
 /books/#BookEntityId/authors/#AuthorEntityId BookAuthorR DELETE
 
--- /books/#BookEntityId/charters BookCharters GET POST
--- /books/#BookEntityId/charters/#CharterEntityId DELETE
+/books/#BookEntityId/charters BookChartersR GET POST
+/books/#BookEntityId/charters/#CharterEntityId BookCharterR DELETE PUT
 
--- /books/#BookEntityId/history BookHistory GET POST
--- /books/#BookEntityId/history/#HistoryEntityId DELETE PUT
+/books/#BookEntityId/history BookHistoryR GET POST
+/books/#BookEntityId/history/#HistoryEntityId BookHistoryItemR PUT
 
 -- Authors routes
--- /authors AuthorsR GET POST
--- /authors/#AuthorEntityId AuthorR GET DELETE PUT
+/authors AuthorsR GET POST
+/authors/#AuthorEntityId AuthorR GET DELETE PUT
 
--- /authors/#AuthorEntityId/books AuthorBooksR GET POST
--- /authors/#AuthorEntityId/books/#BookEntityId DELETE
+/authors/#AuthorEntityId/books AuthorBooksR GET POST
+/authors/#AuthorEntityId/books/#BookEntityId AuthorBookR DELETE
 
 -- Reader routes
--- /readers ReadersR GET POST
--- /readers/#ReaderEntityId GET DELETE PUT
+/readers ReadersR GET POST
+/readers/#ReaderEntityId ReaderR GET DELETE PUT
 
--- /readers/#ReaderEntityId/books GET POST
--- /readers/#ReaderEntityId/books/#BookEntityId DELETE
+/readers/#ReaderEntityId/books ReaderBooksR GET POST
+/readers/#ReaderEntityId/books/#BookEntityId ReaderBookR DELETE

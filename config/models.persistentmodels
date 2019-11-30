@@ -19,7 +19,7 @@ ReaderEntity json sql=reader
     surname Text
 BookEntity json sql=book
     title Text
-    release_date Day
+    releaseDate Day
     readerId ReaderEntityId Maybe
     description Text
 AuthorBookEntity json sql=author_book
@@ -32,7 +32,7 @@ CharterEntity json sql=charter
     title Text
     bookId BookEntityId
 HistoryEntity json sql=history
-    returned_date Day Maybe
+    returnedDate Day Maybe
     realReturnedDate Day Maybe
     takenDate Day
     status Text

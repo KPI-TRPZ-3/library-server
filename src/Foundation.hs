@@ -85,11 +85,23 @@ instance Yesod App
     -> Bool -- ^ Whether or not this is a "write" request.
     -> Handler AuthResult
   -- Routes not requiring authentication.
-  isAuthorized (AuthR _) _         = return Authorized
-  isAuthorized (BookR _) _         = return Authorized
-  isAuthorized BooksR _            = return Authorized
-  isAuthorized (BookAuthorsR _) _  = return Authorized
-  isAuthorized (BookAuthorR _ _) _ = return Authorized
+  isAuthorized (AuthR _) _              = return Authorized
+  isAuthorized (BookR _) _              = return Authorized
+  isAuthorized BooksR _                 = return Authorized
+  isAuthorized (BookAuthorsR _) _       = return Authorized
+  isAuthorized (BookAuthorR _ _) _      = return Authorized
+  isAuthorized (BookChartersR _) _      = return Authorized
+  isAuthorized (BookCharterR _ _) _     = return Authorized
+  isAuthorized (BookHistoryR _) _       = return Authorized
+  isAuthorized (BookHistoryItemR _ _) _ = return Authorized
+  isAuthorized AuthorsR _               = return Authorized
+  isAuthorized (AuthorR _) _            = return Authorized
+  isAuthorized (AuthorBookR _ _) _      = return Authorized
+  isAuthorized (AuthorBooksR _) _       = return Authorized
+  isAuthorized ReadersR _               = return Authorized
+  isAuthorized (ReaderR _) _            = return Authorized
+  isAuthorized (ReaderBooksR _) _       = return Authorized
+  isAuthorized (ReaderBookR _ _) _      = return Authorized
   shouldLogIO :: App -> LogSource -> LogLevel -> IO Bool
   shouldLogIO app _source level =
     return $ appShouldLogAll (appSettings app) || level == LevelWarn || level == LevelError
