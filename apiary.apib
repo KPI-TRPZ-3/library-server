@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://localhost:3000
+HOST: https://b9c6546f.ngrok.io
 
 # Library REST
 
@@ -89,11 +89,13 @@ Finds all authors of the book
 
 + Response 200 (application/json)
 
-        {
-            "id": 1,
-            "name": "Name",
-            "surname": "Surname"
-        }
+        [
+            {
+                "id": 1,
+                "name": "Name",
+                "surname": "Surname"
+            }
+        ]
 
 ### Add Authors to the Book [POST]
 
@@ -109,7 +111,7 @@ You may bind the Book and Authors. It takes JSON Array with ids of authors
 
 + Response 201
 
-## Author Instance of the Book Instance [/books{bookId}/authors/{authorId}]
+## Author Instance of the Book Instance [/books/{bookId}/authors/{authorId}]
 
 + Parameters 
     + bookId (required, number, `1`) ... ID of the book
