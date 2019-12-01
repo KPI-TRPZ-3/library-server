@@ -30,8 +30,8 @@ getReaderBooksR readerId = do
 
 postReaderBooksR :: ReaderEntityId -> Handler Value
 postReaderBooksR readerId = do
-  bookId <- requireCheckJsonBody :: Handler BookEntityId
-  _ <- runDB $ update bookId [BookEntityReaderId =. Just readerId]
+  bookIds <- requireCheckJsonBody :: Handler [BookEntityId]
+  _ <- runDB $ forM bookIds (\x -> update x [BookEntityReaderId =. Just readerId])
   sendResponseStatus status200 ("UPDATED" :: String)
 
 deleteReaderBookR :: ReaderEntityId -> BookEntityId -> Handler Value
