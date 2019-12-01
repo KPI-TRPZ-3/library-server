@@ -26,7 +26,7 @@ getBookR bookId = do
 
 deleteBookR :: BookEntityId -> Handler Value
 deleteBookR bookId = do
-  _ <- runDB $ delete bookId
+  _ <- runDB $ deleteCascade bookId
   sendResponseStatus status200 ("DELETED" :: String)
 
 getBookAuthorsR :: BookEntityId -> Handler Value
@@ -49,7 +49,7 @@ postBookAuthorsR bookId = do
 
 deleteBookAuthorR :: BookEntityId -> AuthorEntityId -> Handler Value
 deleteBookAuthorR bookId authorId = do
-  _ <- runDB $ deleteWhere [AuthorBookEntityAuthorId ==. authorId, AuthorBookEntityBookId ==. bookId]
+  _ <- runDB $ deleteCascadeWhere [AuthorBookEntityAuthorId ==. authorId, AuthorBookEntityBookId ==. bookId]
   sendResponseStatus status200 ("DELETED" :: String)
 
 getBookChartersR :: BookEntityId -> Handler Value
@@ -72,7 +72,7 @@ postBookChartersR bookId = do
 
 deleteBookCharterR :: BookEntityId -> CharterEntityId -> Handler Value
 deleteBookCharterR bookId charterId = do
-  _ <- runDB $ deleteWhere [CharterEntityId ==. charterId, CharterEntityBookId ==. bookId]
+  _ <- runDB $ deleteCascadeWhere [CharterEntityId ==. charterId, CharterEntityBookId ==. bookId]
   sendResponseStatus status200 ("DELETED" :: String)
 
 putBookCharterR :: BookEntityId -> CharterEntityId -> Handler Value

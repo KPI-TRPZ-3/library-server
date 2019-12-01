@@ -23,18 +23,18 @@ BookEntity json sql=book
     readerId ReaderEntityId Maybe
     description Text
 AuthorBookEntity json sql=author_book
-    authorId AuthorEntityId
-    bookId BookEntityId
+    authorId AuthorEntityId DeleteCascade
+    bookId BookEntityId DeleteCascade
     Primary authorId bookId
 ReaderCardEntity json sql=reader_card
-    ownerId ReaderEntityId
+    ownerId ReaderEntityId DeleteCascade
 CharterEntity json sql=charter
     title Text
-    bookId BookEntityId
+    bookId BookEntityId DeleteCascade
 HistoryEntity json sql=history
     returnedDate Day Maybe
     realReturnedDate Day Maybe
     takenDate Day
     status Text
-    bookId BookEntityId
-    readerId ReaderEntityId
+    bookId BookEntityId DeleteCascade
+    readerId ReaderEntityId DeleteCascade

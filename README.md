@@ -2,4 +2,4 @@
 
 ## Documentation of API
 
-https://danyloshevchenko.docs.apiary.io/
+https://libraryrest.docs.apiary.io

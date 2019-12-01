@@ -14,7 +14,7 @@ getReaderR readerId = do
 
 deleteReaderR :: ReaderEntityId -> Handler Value
 deleteReaderR readerId = do
-  _ <- runDB $ delete readerId
+  _ <- runDB $ deleteCascade readerId
   sendResponseStatus status200 ("DELETED" :: String)
 
 putReaderR :: ReaderEntityId -> Handler Value

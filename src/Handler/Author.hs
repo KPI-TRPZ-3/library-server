@@ -16,7 +16,7 @@ getAuthorR authorId = do
 
 deleteAuthorR :: AuthorEntityId -> Handler Value
 deleteAuthorR authorId = do
-  _ <- runDB $ delete authorId
+  _ <- runDB $ deleteCascade authorId
   sendResponseStatus status200 ("DELETED" :: String)
 
 putAuthorR :: AuthorEntityId -> Handler Value
@@ -45,5 +45,5 @@ postAuthorBooksR authorId = do
 
 deleteAuthorBookR :: AuthorEntityId -> BookEntityId -> Handler Value
 deleteAuthorBookR authorId bookId = do
-  _ <- runDB $ deleteWhere [AuthorBookEntityAuthorId ==. authorId, AuthorBookEntityBookId ==. bookId]
+  _ <- runDB $ deleteCascadeWhere [AuthorBookEntityAuthorId ==. authorId, AuthorBookEntityBookId ==. bookId]
   sendResponseStatus status200 ("DELETED" :: String)
